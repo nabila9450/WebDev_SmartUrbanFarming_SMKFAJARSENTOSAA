@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Urban Farm - Edukasi & Produksi Mandiri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="features.css">
+    <link rel="stylesheet" href="revisi.css">
+    <link rel="stylesheet" href="stack.css">
+    <link rel="stylesheet" href="orbital-gallery.css">
+    <script type="importmap">
+  { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+                 "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+  </script>
+</head>
+
+<body class="lp">
+    <div id="pre"><i></i></div>
+    <script>
+        /* Pengaman preloader: tetap hilang walau script.js (Three.js) gagal dimuat atau event load lambat */
+        (function () {
+            var hide = function () { var p = document.getElementById("pre"); if (p) p.classList.add("done"); };
+            setTimeout(hide, 5000);
+            addEventListener("load", function () { setTimeout(hide, 1500); });
+        })();
+    </script>
+
+    <header class="nav" id="nav" data-t="dark">
+        <a class="logo" href="#hero"><span class="hex"></span>urbanfarm</a>
+        <nav>
+            <div class="dd"><a href="#solusi">SOLUSI &#9662;</a>
+                <div class="menu"><a href="#pengenalan">Pengenalan</a><a href="#metode">Metode Tanam</a></div>
+            </div>
+            <div class="dd"><a href="#teknologi">TEKNOLOGI &#9662;</a>
+                <div class="menu"><a href="#integrasi">Integrasi IoT</a><a href="#eksplor">Model 3D</a></div>
+            </div>
+            <a href="pages/tentang.html">TENTANG</a>
+            <div class="dd"><a href="pages/edukasi.html">SUMBER &#9662;</a>
+                <div class="menu"><a href="#panduan">Panduan</a><a href="#manfaat">Manfaat</a></div>
+            </div>
+        </nav>
+        <a class="talk" href="#eksplor">MULAI EKSPLOR <i>&#8599;</i></a>
+    </header>
+
+    <!-- HERO bertahap: scene 1 (hijau + objek melayang) -> scene 2 (foto tanaman + hotspot) -->
+    <section id="hero" data-theme="dark">
+        <div class="stick">
+            <div class="sc1">
+                <!-- BG HERO: ganti gambar dengan mengubah src di bawah (atau timpa file assets/img/hero-bg.jpg) -->
+                <img class="bg-img" src="Desain Tanpa Judul.png" alt="" aria-hidden="true" decoding="async">
+                <div class="vid-veil" aria-hidden="true"></div>
+                <div class="fls">
+                </div>
+                <div class="hero-txt">
+                    <h1>Tempat Sains Hidroponik dan Pangan Mandiri Kota Bertemu</h1>
+                    <p class="hero-p">Kecerdasan pertanian dari ujung ke ujung, ditenagai sains, sensor, dan data
+                        transparan
+                        yang bisa kamu percaya.</p>
+                    <a class="talk box" href="#eksplor">MULAI EKSPLOR <i>&#8599;</i></a>
+                </div>
+            </div>
+            <div class="sc2" data-img="foto2.jpeg">
+                <div class="sc2-t">
+                    <span class="sc2-eyebrow">Pemantauan hidroponik</span>
+                    <h2 class="sc2-lead">Solusi ekosistem kami mengubah data ilmiah menjadi metrik siap panen, sehingga
+                        kamu
+                        bisa mendorong hasil yang <em>terukur</em>, bukan sekadar janji.</h2>
+                    <p class="sc2-sub">Sensor mencatat kelembapan media tanam, pH air nutrisi, dan EC larutan secara
+                        berkala. Dari angka-angka itu kamu bisa melihat kapan tanaman perlu disesuaikan, bukan
+                        menebak-nebak.
+                        Setiap catatan tersimpan, jadi keputusanmu selalu bisa ditelusuri dan dipelajari ulang.</p>
+                </div>
+                <div class="hot-row">
+                    <div class="hot"><i>+</i><small><b>KELEMBAPAN MEDIA</b><span>Terpantau real-time, agar media tidak
+                                terlalu basah atau kering.</span></small></div>
+                    <div class="hot"><i>+</i><small><b>pH AIR NUTRISI</b><span>Dijaga di rentang ideal, sekitar 5,5
+                                sampai 6,5 untuk sayuran daun.</span></small></div>
+                    <div class="hot"><i>+</i><small><b>EC LARUTAN</b><span>Tercatat otomatis untuk menakar kepekatan
+                                nutrisi bagi akar.</span></small></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec light" id="pengenalan" data-theme="light">
+        <span class="pill">EDUKASI & TEKNOLOGI</span>
+        <h2 class="rv">Apa itu Smart & Urban Farming?</h2>
+        <div class="intro">
+            <div class="intro-img intro-art rv" role="img"
+                aria-label="Ilustrasi kebun vertikal pintar di atap kota: rak tanam bertingkat, sensor, dan dashboard data">
+                <svg viewBox="0 0 600 560" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true" focusable="false">
+                    <defs>
+                        <linearGradient id="ia-bg" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stop-color="#1f6b3f" />
+                            <stop offset="1" stop-color="#0b2a18" />
+                        </linearGradient>
+                        <radialGradient id="ia-sun" cx=".5" cy=".5" r=".5">
+                            <stop offset="0" stop-color="#d9ff8a" stop-opacity=".75" />
+                            <stop offset="1" stop-color="#d9ff8a" stop-opacity="0" />
+                        </radialGradient>
+                        <linearGradient id="ia-glass" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stop-color="#b9f45c" stop-opacity=".2" />
+                            <stop offset="1" stop-color="#b9f45c" stop-opacity=".04" />
+                        </linearGradient>
+                        <linearGradient id="ia-water" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stop-color="#3fb6e8" />
+                            <stop offset="1" stop-color="#1b6f9c" />
+                        </linearGradient>
+                        <pattern id="ia-dots" width="22" height="22" patternUnits="userSpaceOnUse">
+                            <circle cx="2" cy="2" r="1.2" fill="#fff" opacity=".1" />
+                        </pattern>
+                        <pattern id="ia-win" width="14" height="16" patternUnits="userSpaceOnUse">
+                            <rect x="4" y="4" width="5" height="7" rx="1" fill="#b9f45c" opacity=".3" />
+                        </pattern>
+                        <g id="ia-plant">
+                            <path d="M0 0V-20" stroke="#4cb82e" stroke-width="2.5" stroke-linecap="round" fill="none" />
+                            <ellipse cx="-7" cy="-19" rx="8" ry="4" transform="rotate(-30 -7 -19)" fill="#3a9d28" />
+                            <ellipse cx="7" cy="-22" rx="8" ry="4" transform="rotate(28 7 -22)" fill="#7ed957" />
+                            <ellipse cx="0" cy="-29" rx="4.5" ry="8" fill="#b9f45c" />
+                        </g>
+                        <g id="ia-drop">
+                            <path d="M0 -11C6 -3 9 1 9 5a9 9 0 0 1-18 0C-9 1-6 -3 0 -11z" fill="#3fb6e8" />
+                            <path d="M-3 4a4 4 0 0 0 3 3" stroke="#fff" stroke-opacity=".7" stroke-width="1.6"
+                                stroke-linecap="round" fill="none" />
+                        </g>
+                    </defs>
+
+                    <!-- langit, titik-titik halus, matahari -->
+                    <rect width="600" height="560" fill="url(#ia-bg)" />
+                    <rect width="600" height="560" fill="url(#ia-dots)" />
+                    <circle cx="500" cy="112" r="140" fill="url(#ia-sun)" opacity=".6" />
+                    <circle cx="500" cy="112" r="30" fill="#d9ff8a" />
+
+                    <!-- siluet gedung kota -->
+                    <g fill="#fff" opacity=".07">
+                        <rect x="18" y="330" width="64" height="140" />
+                        <rect x="92" y="290" width="48" height="180" />
+                        <rect x="148" y="372" width="46" height="98" />
+                        <rect x="458" y="330" width="64" height="140" />
+                        <rect x="530" y="268" width="56" height="202" />
+                        <rect x="408" y="388" width="44" height="82" />
+                    </g>
+                    <g fill="url(#ia-win)">
+                        <rect x="18" y="330" width="64" height="140" />
+                        <rect x="92" y="290" width="48" height="180" />
+                        <rect x="148" y="372" width="46" height="98" />
+                        <rect x="458" y="330" width="64" height="140" />
+                        <rect x="530" y="268" width="56" height="202" />
+                        <rect x="408" y="388" width="44" height="82" />
+                    </g>
+
+                    <!-- atap / tanah -->
+                    <rect x="0" y="470" width="600" height="90" fill="#08200f" />
+                    <rect x="0" y="470" width="600" height="2" fill="#b9f45c" opacity=".4" />
+
+                    <!-- rumah kaca: rangka, atap, tiang -->
+                    <rect x="150" y="170" width="300" height="300" rx="14" fill="url(#ia-glass)" stroke="#b9f45c"
+                        stroke-opacity=".55" stroke-width="2" />
+                    <polygon points="138,176 300,112 462,176" fill="#b9f45c" fill-opacity=".12" stroke="#b9f45c"
+                        stroke-opacity=".6" stroke-width="2" stroke-linejoin="round" />
+                    <path d="M300 112V170M219 144V170M381 144V170" stroke="#b9f45c" stroke-opacity=".35"
+                        stroke-width="1.5" />
+                    <path d="M170 180V470M430 180V470" stroke="#b9f45c" stroke-opacity=".3" stroke-width="2" />
+
+                    <!-- rak tanam bertingkat: lampu tumbuh, talang air, tanaman -->
+                    <g>
+                        <rect x="170" y="250" width="260" height="12" rx="6" fill="#0a2314" stroke="#4cb82e"
+                            stroke-width="1.5" />
+                        <rect x="177" y="253" width="246" height="6" rx="3" fill="#3fb6e8" opacity=".85" />
+                        <rect x="180" y="194" width="240" height="40" fill="#b9f45c" opacity=".05" />
+                        <rect x="180" y="192" width="240" height="3" rx="1.5" fill="#d9ff8a" opacity=".6" />
+                        <rect x="170" y="320" width="260" height="12" rx="6" fill="#0a2314" stroke="#4cb82e"
+                            stroke-width="1.5" />
+                        <rect x="177" y="323" width="246" height="6" rx="3" fill="#3fb6e8" opacity=".85" />
+                        <rect x="180" y="264" width="240" height="40" fill="#b9f45c" opacity=".05" />
+                        <rect x="180" y="262" width="240" height="3" rx="1.5" fill="#d9ff8a" opacity=".6" />
+                        <rect x="170" y="390" width="260" height="12" rx="6" fill="#0a2314" stroke="#4cb82e"
+                            stroke-width="1.5" />
+                        <rect x="177" y="393" width="246" height="6" rx="3" fill="#3fb6e8" opacity=".85" />
+                        <rect x="180" y="334" width="240" height="40" fill="#b9f45c" opacity=".05" />
+                        <rect x="180" y="332" width="240" height="3" rx="1.5" fill="#d9ff8a" opacity=".6" />
+                        <use href="#ia-plant" x="190" y="250" />
+                        <use href="#ia-plant" x="222" y="250" />
+                        <use href="#ia-plant" x="254" y="250" />
+                        <use href="#ia-plant" x="286" y="250" />
+                        <use href="#ia-plant" x="318" y="250" />
+                        <use href="#ia-plant" x="350" y="250" />
+                        <use href="#ia-plant" x="382" y="250" />
+                        <use href="#ia-plant" x="414" y="250" />
+                        <use href="#ia-plant" x="190" y="320" />
+                        <use href="#ia-plant" x="222" y="320" />
+                        <use href="#ia-plant" x="254" y="320" />
+                        <use href="#ia-plant" x="286" y="320" />
+                        <use href="#ia-plant" x="318" y="320" />
+                        <use href="#ia-plant" x="350" y="320" />
+                        <use href="#ia-plant" x="382" y="320" />
+                        <use href="#ia-plant" x="414" y="320" />
+                        <use href="#ia-plant" x="190" y="390" />
+                        <use href="#ia-plant" x="222" y="390" />
+                        <use href="#ia-plant" x="254" y="390" />
+                        <use href="#ia-plant" x="286" y="390" />
+                        <use href="#ia-plant" x="318" y="390" />
+                        <use href="#ia-plant" x="350" y="390" />
+                        <use href="#ia-plant" x="382" y="390" />
+                        <use href="#ia-plant" x="414" y="390" />
+                    </g>
+
+                    <!-- tangki nutrisi + pipa yang mengalirkan air ke tiap rak -->
+                    <rect x="176" y="424" width="248" height="40" rx="10" fill="url(#ia-water)" />
+                    <path d="M176 442q16 -9 32 0t32 0t32 0t32 0t32 0t32 0t32 0" stroke="#fff" stroke-opacity=".5"
+                        stroke-width="2" fill="none" />
+                    <path class="ia-flow" d="M176 446H160V256M160 256H170M160 326H170M160 396H170" stroke="#3fb6e8"
+                        stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+
+                    <!-- tanaman di atap, kiri dan kanan -->
+                    <g>
+                        <rect x="58" y="458" width="44" height="12" rx="3" fill="#0a2314" stroke="#b9f45c"
+                            stroke-opacity=".4" />
+                        <g transform="translate(80 458) scale(1.7)">
+                            <use href="#ia-plant" />
+                        </g>
+                        <rect x="498" y="458" width="44" height="12" rx="3" fill="#0a2314" stroke="#b9f45c"
+                            stroke-opacity=".4" />
+                        <g transform="translate(520 458) scale(1.7)">
+                            <use href="#ia-plant" />
+                        </g>
+                    </g>
+
+                    <!-- hub IoT di puncak atap + gelombang sinyal -->
+                    <circle cx="300" cy="98" r="5.5" fill="#b9f45c" />
+                    <g fill="none" stroke="#b9f45c" stroke-width="3" stroke-linecap="round">
+                        <path class="ia-arc" d="M286 84A20 20 0 0 1 314 84" />
+                        <path class="ia-arc b" d="M278 74.8A32 32 0 0 1 322 74.8" />
+                        <path class="ia-arc c" d="M270 65.8A44 44 0 0 1 330 65.8" />
+                    </g>
+
+                    <!-- kartu dashboard melayang (kiri atas) -->
+                    <path class="ia-flow" d="M178 118C220 118 250 98 294 98" stroke="#b9f45c" stroke-opacity=".7"
+                        stroke-width="2" fill="none" />
+                    <g class="ia-float">
+                        <rect x="26" y="68" width="152" height="100" rx="14" fill="#08200f" stroke="#b9f45c"
+                            stroke-opacity=".5" />
+                        <text x="40" y="90" font-family="'Space Mono',monospace" font-size="9" font-weight="700"
+                            fill="#b9f45c" opacity=".85">pH AIR NUTRISI</text>
+                        <text x="40" y="128" font-family="'Instrument Serif',serif" font-size="38"
+                            fill="#fff">6,0</text>
+                        <rect x="116" y="104" width="48" height="17" rx="8.5" fill="#b9f45c" />
+                        <text x="140" y="116" text-anchor="middle" font-family="'Space Mono',monospace" font-size="9"
+                            font-weight="700" fill="#0b0f0d">Ideal</text>
+                        <polyline points="40,154 60,149 78,153 98,143 118,147 138,137 162,141" fill="none"
+                            stroke="#b9f45c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </g>
+
+                    <!-- chip EC melayang (kanan) -->
+                    <path class="ia-flow" d="M470 262H450" stroke="#b9f45c" stroke-opacity=".7" stroke-width="2"
+                        fill="none" />
+                    <circle cx="450" cy="262" r="4.5" fill="#b9f45c" />
+                    <g class="ia-float b">
+                        <rect x="470" y="236" width="122" height="52" rx="12" fill="#08200f" stroke="#b9f45c"
+                            stroke-opacity=".5" />
+                        <text x="483" y="254" font-family="'Space Mono',monospace" font-size="9" font-weight="700"
+                            fill="#b9f45c" opacity=".85">EC LARUTAN</text>
+                        <text x="483" y="277" font-family="'Instrument Serif',serif" font-size="19" fill="#fff">1,7
+                            mS/cm</text>
+                    </g>
+
+                    <!-- tetes air melayang -->
+                    <g class="ia-float c">
+                        <use href="#ia-drop" x="104" y="262" />
+                    </g>
+                    <g class="ia-float">
+                        <use href="#ia-drop" transform="translate(86 332) scale(.8)" />
+                    </g>
+                </svg>
+            </div>
+            <div class="rv">
+                <div class="def"><small>URBAN FARMING</small>
+                    <p>Praktik bercocok tanam di lingkungan perkotaan dengan memanfaatkan lahan terbatas.</p>
+                </div>
+                <div class="def"><small>SMART FARMING</small>
+                    <p>Pendekatan pertanian modern yang memanfaatkan teknologi (seperti IoT, sensor, dan otomatisasi)
+                        untuk meningkatkan efisiensi dan hasil panen.</p>
+                </div>
+                <div class="def hl"><small>SMART URBAN FARMING</small>
+                    <p>Gabungan keduanya: solusi pertanian perkotaan yang presisi, hemat air, hemat tempat, serta dapat
+                        dipantau dan dikontrol secara otomatis.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec light" id="solusi" data-theme="light">
+        <span class="pill">SOLUSI KAMI</span>
+        <h2 class="rv">Memvalidasi Apa yang Tanaman Butuhkan Secara Alami</h2>
+        <div class="grid2">
+            <div class="dash rv" id="dash">
+                <div class="dash-photo" data-img="foto4.jpeg"></div>
+
+                <div class="dash-main">
+                    <div class="dash-head">
+                        <div>
+                            <h3>Pangan Sehat Dibangun dari Data, Bukan Perkiraan</h3>
+                            <p>Dashboard ini memantau kondisi larutan nutrisi, lingkungan greenhouse, dan kesehatan rak
+                                tanam secara real-time, sehingga setiap keputusan berdasarkan angka.</p>
+                        </div>
+                        <a href="pages/edukasi.html">Pelajari &#8599;</a>
+                    </div>
+
+                    <div class="kpis">
+                        <div class="kpi"><span class="ic"><svg viewBox="0 0 24 24">
+                                    <path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z" />
+                                </svg></span>
+                            <div><small>Suhu Air</small><strong data-count="24" data-suf="°C">24°C</strong><em>Optimal
+                                    20-26°C</em></div>
+                        </div>
+                        <div class="kpi"><span class="ic"><svg viewBox="0 0 24 24">
+                                    <path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3" />
+                                </svg></span>
+                            <div><small>pH Larutan</small><strong data-count="6.2" data-dec="1">6.2</strong><em>Ideal
+                                    5.5-6.5</em></div>
+                        </div>
+                        <div class="kpi"><span class="ic"><svg viewBox="0 0 24 24">
+                                    <path d="M3 12h4l3-8 4 16 3-8h4" />
+                                </svg></span>
+                            <div><small>Nutrisi (TDS)</small><strong data-count="840" data-suf=" ppm">840
+                                    ppm</strong><em class="warn">Turun 6% dari kemarin</em></div>
+                        </div>
+                        <div class="kpi"><span class="ic"><svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="4" />
+                                    <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" />
+                                </svg></span>
+                            <div><small>Kelembapan Udara</small><strong data-count="68"
+                                    data-suf="%">68%</strong><em>Stabil</em></div>
+                        </div>
+                    </div>
+
+                    <div class="dash-row r1">
+                        <div class="dbox" id="c-tds">
+                            <h4>Tren Nutrisi Larutan (TDS) <span>7 hari terakhir</span></h4>
+                            <svg viewBox="0 0 560 190" role="img" aria-label="Grafik tren TDS"></svg>
+                            <div class="tip"></div>
+                        </div>
+                        <div class="dbox">
+                            <h4>Status Rak Tanam</h4>
+                            <div class="donut-wrap">
+                                <svg viewBox="0 0 120 120" id="c-donut" role="img" aria-label="Status rak tanam"></svg>
+                                <div class="mid"><b>24</b><span>rak tanam</span></div>
+                            </div>
+                            <div class="legend"><span><i style="background:#123a22"></i>Optimal 14</span><span><i
+                                        style="background:#4cb82e"></i>Perlu dicek 7</span><span><i
+                                        style="background:#b9f45c"></i>Kritis 3</span></div>
+                        </div>
+                    </div>
+
+                    <div class="dash-row r2">
+                        <div class="dbox" id="c-ph">
+                            <h4>Tren pH &amp; Suhu Air <span>24 jam terakhir</span></h4>
+                            <svg viewBox="0 0 560 150" role="img" aria-label="Grafik pH dan suhu air"></svg>
+                            <div class="legend" style="justify-content:flex-start;margin-top:.2rem"><span><i
+                                        style="background:#123a22"></i>pH</span><span><i
+                                        style="background:#4cb82e"></i>Suhu air</span></div>
+                        </div>
+                        <div class="dbox util">
+                            <h4>Efisiensi Nutrisi</h4>
+                            <div class="top"><b data-count="85" data-suf="%">85%</b><span
+                                    style="font-size:.7rem;color:#5c6b62;text-align:right">terserap tanaman,<br>minim
+                                    terbuang</span></div>
+                            <div class="bars" id="c-bars"></div>
+                        </div>
+                    </div>
+                    <div class="dash-note">*Data ilustrasi, ganti dengan data sensor sebenarnya.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec light" id="metode" data-theme="light">
+        <span class="pill">METODE BERCOCOK TANAM</span>
+        <h2 class="rv">Tiga Cara Menanam di Tengah Kota</h2>
+        <div class="grid3">
+            <div class="card-img mcard rv" role="button" tabindex="0" aria-expanded="false" data-img="foto6.jpeg">
+                <i>&#8599;</i><small>TANPA TANAH</small><b>Hidroponik</b>
+                <p>Menanam dengan media air kaya nutrisi (AB Mix) tanpa tanah.</p>
+                <ul class="more">
+                    <li><b>NFT</b> (Nutrient Film Technique): air nutrisi mengalir tipis terus-menerus melintasi akar.
+                    </li>
+                    <li><b>DFT</b> (Deep Flow Technique): akar terendam genangan air nutrisi yang dangkal.</li>
+                    <li><b>Wick</b> (sumbu): sumbu kain flanel menyerap nutrisi ke media tanam, cocok untuk pemula.</li>
+                    <li>Tanaman cocok: selada, pakcoy, bayam, kangkung, seledri.</li>
+                </ul>
+            </div>
+            <div class="card-img mcard rv" role="button" tabindex="0" aria-expanded="false" data-img="foto1.jpeg">
+                <i>&#8599;</i><small>LAHAN SEMPIT</small><b>Vertikultur</b>
+                <p>Bercocok tanam bertingkat ke atas memakai rak, pipa PVC, atau pot gantung.</p>
+                <ul class="more">
+                    <li>Kelebihan: menghemat lahan hingga 70-80%.</li>
+                    <li>Tanaman cocok: strawberry, cabe rawit, tomat, dan sayuran daun.</li>
+                </ul>
+            </div>
+            <div class="card-img mcard rv" role="button" tabindex="0" aria-expanded="false" data-img="foto7.jpeg">
+                <i>&#8599;</i><small>IKAN & TANAMAN</small><b>Akuaponik</b>
+                <p>Budidaya ikan dan hidroponik dalam satu ekosistem tertutup.</p>
+                <ul class="more">
+                    <li>Kotoran ikan diurai bakteri menjadi nutrisi bagi tanaman.</li>
+                    <li>Tanaman menyerap nutrisi sekaligus menyaring air, sehingga bersih kembali untuk ikan.</li>
+                </ul>
+            </div>
+        </div>
+        <p class="hintc">KLIK KARTU UNTUK MELIHAT DETAIL</p>
+    </section>
+
+    <!-- Galeri foto 3D melayang (tanpa teks tambahan; latar transparan) -->
+    <section class="sec light" id="galeri" data-theme="light" aria-label="Galeri foto 3D">
+        <div class="og" data-orbital-gallery>
+            <!-- BG GALERI: ganti gambar dengan mengubah src di bawah (atau timpa file assets/img/galeri-bg.jpg) -->
+            <img class="og-bg" src="foto9.jpeg" alt="" aria-hidden="true" decoding="async">
+        </div>
+    </section>
+
+    <section class="sec dark tech" id="teknologi" data-theme="dark">
+        <div class="tech-img" data-img="presisiILMIAH.jpeg"></div>
+        <span class="pill">TEKNOLOGI KAMI</span>
+        <h2 class="big rv">Presisi Ilmiah.<br>Panen Mandiri.<br>Hasil Terpercaya.</h2>
+        <p class="rv">Yang pertama membawa pemantauan hidroponik berbasis sensor ke kebun urban, mengubah data air
+            menjadi panen yang terverifikasi.</p>
+        <span class="round">&#9737;</span>
+    </section>
+
+    <section class="sec dark stmt" data-theme="dark">
+        <div class="pills"><span class="pill">SENSOR pH</span><span class="pill">SENSOR EC</span></div>
+        <h2 class="big rv">Hanya Data Nyata yang Terukur, Disajikan dengan Integritas.</h2>
+    </section>
+
+    <section class="sec dark integ" id="integrasi" data-theme="dark">
+        <span class="pill">INTEGRASI IoT</span>
+        <h2 class="big rv">Teknologi yang Memantau, Kamu Tinggal Menikmati.</h2>
+        <p class="lead rv">Penerapan teknologi membuat urban farming lebih mudah dikelola secara mandiri tanpa harus
+            memantau setiap saat.</p>
+        <table class="tbl rv">
+            <thead>
+                <tr>
+                    <th>KOMPONEN TEKNOLOGI</th>
+                    <th>FUNGSI & PERAN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Sensor Kelembapan & pH Air</td>
+                    <td>Memantau kadar air dan tingkat keasaman larutan nutrisi secara real-time.</td>
+                </tr>
+                <tr>
+                    <td>Otomatisasi Penyiraman / Pompa</td>
+                    <td>Pompa air atau penyiram otomatis yang aktif berdasarkan jadwal atau sensor.</td>
+                </tr>
+                <tr>
+                    <td>Lampu Grow Light (LED)</td>
+                    <td>Pengganti cahaya matahari untuk tanaman di dalam ruangan (indoor farming).</td>
+                </tr>
+                <tr>
+                    <td>Monitoring Berbasis Web/App</td>
+                    <td>Menampilkan grafik pertumbuhan, kondisi suhu, dan status nutrisi tanaman.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="sec light" id="eksplor" data-theme="light">
+        <span class="pill">EKSPLOR MODUL</span>
+        <h2 class="rv">Putar, Zoom, dan Klik Setiap Bagian</h2>
+        <div class="explore">
+            <div class="viewer-wrap">
+                <div id="viewer" aria-label="Model 3D modul hidroponik"></div>
+                <div id="loader" class="overlay">Memuat model 3D...</div>
+                <div id="fallback" class="overlay" hidden></div>
+                <p class="hint">Seret untuk memutar &bull; Klik kanan / 2 jari untuk menggeser &bull; Scroll untuk zoom
+                    &bull; Klik bagian untuk info</p>
+                <div class="viewer-actions">
+                    <button id="btn-pan" type="button" aria-pressed="false">Mode geser</button>
+                    <button id="btn-reset" type="button">Reset tampilan</button>
+                    <button id="btn-rotate" type="button" aria-pressed="false">Putar otomatis</button>
+                </div>
+            </div>
+            <aside class="panel" aria-live="polite">
+                <h2>Informasi</h2>
+                <div id="panel-body"></div>
+            </aside>
+        </div>
+    </section>
+
+    <section class="sec light" id="panduan" data-theme="light">
+        <span class="pill">PANDUAN PRODUKSI MANDIRI</span>
+        <h2 class="rv">Mulai Hidroponik Sederhana di Rumah</h2>
+        <div class="guide">
+            <div class="guide-img rv" data-img="foto3.jpeg"></div>
+            <div class="rv">
+                <details class="acc" name="langkah" open>
+                    <summary><small>01</small>Persiapan Alat & Bahan</summary>
+                    <ul>
+                        <li>Pipa PVC / tray hidroponik</li>
+                        <li>Netpot & kain flanel (sumbu)</li>
+                        <li>Media tanam (rockwool)</li>
+                        <li>Nutrisi AB Mix & benih tanaman (misalnya selada / pakcoy)</li>
+                    </ul>
+                </details>
+                <details class="acc" name="langkah">
+                    <summary><small>02</small>Penyemaian Benih</summary>
+                    <ul>
+                        <li>Basahi rockwool, lubangi sedikit, lalu letakkan benih.</li>
+                        <li>Simpan di tempat gelap hingga berkecambah (1-2 hari), lalu kenalkan pada cahaya matahari.
+                        </li>
+                    </ul>
+                </details>
+                <details class="acc" name="langkah">
+                    <summary><small>03</small>Pemindahan & Pemberian Nutrisi</summary>
+                    <ul>
+                        <li>Setelah tumbuh 3-4 daun, pindahkan rockwool ke dalam netpot.</li>
+                        <li>Campurkan nutrisi AB Mix ke dalam air sesuai dosis ppm (parts per million) yang dibutuhkan
+                            tanaman.</li>
+                    </ul>
+                </details>
+                <details class="acc" name="langkah">
+                    <summary><small>04</small>Perawatan & Panen</summary>
+                    <ul>
+                        <li>Cek ketinggian air nutrisi dan nilai pH/ppm secara berkala.</li>
+                        <li>Tanaman sayur daun umumnya dapat dipanen dalam waktu 30-45 hari.</li>
+                    </ul>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec dark" id="manfaat" data-theme="dark">
+        <span class="pill">MANFAAT</span>
+        <h2 class="big rv">Mengapa Smart & Urban Farming?</h2>
+        <div class="bens">
+            <div class="ben rv"><small>01</small><b>Ketahanan Pangan Rumah Tangga</b>
+                <p>Sayuran segar, sehat, dan bebas pestisida langsung dari rumah.</p>
+            </div>
+            <div class="ben hl rv"><small>02</small><b>Efisiensi Sumber Daya</b>
+                <p>Penggunaan air hingga 90% lebih hemat dibandingkan pertanian konvensional.</p>
+            </div>
+            <div class="ben rv"><small>03</small><b>Ramah Lingkungan</b>
+                <p>Mengurangi jejak karbon distribusi pangan dan memanfaatkan lahan menganggur seperti atap (rooftop).
+                </p>
+            </div>
+            <div class="ben rv"><small>04</small><b>Nilai Edukasi & Estetika</b>
+                <p>Sarana belajar teknologi hijau serta memperindah estetika bangunan.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec light trust" data-theme="light">
+        <h3 class="rv">Masalah Terbesar Pertanian Kota: Pemantauan</h3>
+        <p class="rv">Ukur dampakmu, buktikan kemajuanmu, dan raih kepercayaan keluarga, komunitas, dan juri yang
+            menilai.</p>
+        <div class="stack mon">
+            <div class="k k1 rv"><span class="lb">SUHU AIR</span>
+                <svg class="gauge" viewBox="0 0 100 62" role="img" aria-label="Suhu air 24 derajat Celsius">
+                    <path class="tr" pathLength="100" d="M10 54A40 40 0 0 1 90 54" />
+                    <path class="pr" pathLength="100" style="--o:55" d="M10 54A40 40 0 0 1 90 54" />
+                </svg>
+                <span class="val">24°C</span><span class="sub">Optimal 20-26°C</span>
+            </div>
+            <div class="k k2 rv"><span class="lb">KELEMBAPAN</span>
+                <svg class="drop" viewBox="0 0 80 80" role="img" aria-label="Kelembapan 68 persen">
+                    <defs>
+                        <clipPath id="wvc">
+                            <circle cx="40" cy="40" r="34" />
+                        </clipPath>
+                    </defs>
+                    <circle class="o" cx="40" cy="40" r="34" />
+                    <g clip-path="url(#wvc)">
+                        <g class="wv">
+                            <path class="w" d="M-40 30q10-6 20 0t20 0 20 0 20 0 20 0 20 0V80H-40z" />
+                        </g>
+                    </g>
+                </svg>
+                <span class="val">68%</span><span class="sub">Stabil</span>
+            </div>
+            <div class="k k3 phm rv">
+                <div class="top"><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 3s6 6.2 6 10.5A6 6 0 0 1 6 13.5C6 9.2 12 3 12 3z" />
+                        <path d="M9.4 14.6a2.7 2.7 0 0 0 2.5 1.8" />
+                    </svg>pH AIR NUTRISI<em class="ok">Ideal</em></div>
+                <div class="num">6,0<small>pH</small></div>
+                <div class="sc"
+                    style="--x:42.9%;background:linear-gradient(90deg,#e5483b,#f08a2c 18%,#f2d230 33%,#8fd13f 46%,#2fae5b 57%,#1f9bb5 72%,#3b5fd0 86%,#6b3fb0)">
+                    <i class="band" style="left:39.3%;width:7.1%"></i><i class="mk"></i>
+                </div>
+                <div class="ticks"><span>0 Asam</span><span>7 Netral</span><span>14 Basa</span></div>
+                <div class="ft">Rentang ideal sayuran daun: 5,5 sampai 6,5</div>
+            </div>
+            <div class="k k4 rv"><span class="lb">NUTRISI (TDS)</span><span class="val">840 ppm</span>
+                <div class="bars" role="img" aria-label="Meter TDS 840 dari 1500 ppm"><i class="on" style="--h:0"></i><i
+                        class="on" style="--h:4"></i><i class="on" style="--h:7"></i><i class="on" style="--h:10"></i><i
+                        class="on" style="--h:14"></i><i class="on" style="--h:18"></i><i class="on"
+                        style="--h:21"></i><i class="on" style="--h:24"></i><i class="on" style="--h:28"></i><i
+                        class="on" style="--h:32"></i><i class="on" style="--h:35"></i><i class="" style="--h:38"></i><i
+                        class="" style="--h:42"></i><i class="" style="--h:46"></i><i class="" style="--h:49"></i><i
+                        class="" style="--h:52"></i><i class="" style="--h:56"></i><i class="" style="--h:60"></i><i
+                        class="" style="--h:63"></i><i class="" style="--h:66"></i></div><span class="sub">Skala 0-1500
+                    ppm</span>
+            </div>
+            <div class="k k5 rv"><span class="lb">EC LARUTAN</span><span class="val">1,7 mS/cm</span>
+                <svg class="spark" viewBox="0 0 120 48" preserveAspectRatio="none" role="img" aria-label="Tren EC">
+                    <defs>
+                        <linearGradient id="spg" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stop-color="#4cb82e" stop-opacity=".45" />
+                            <stop offset="1" stop-color="#4cb82e" stop-opacity="0" />
+                        </linearGradient>
+                    </defs>
+                    <path class="a" d="M0 34 15 30 30 36 45 22 60 26 75 14 90 20 105 10 118 14V48H0z" />
+                    <path class="l" d="M0 34 15 30 30 36 45 22 60 26 75 14 90 20 105 10 118 14" />
+                    <circle cx="118" cy="14" r="3" />
+                </svg>
+                <span class="sub">Tren 7 hari</span>
+            </div>
+        </div>
+        <p class="muted">Nilai di atas adalah contoh simulasi.</p>
+    </section>
+
+    <section class="sec light case" data-theme="light">
+        <span class="pill">STUDI KASUS</span>
+        <p class="words" id="words">Pelajari bagaimana kebun-kebun kecil memakai urbanfarm untuk mengukur hasil,
+            memantau nutrisi, dan memanen lebih mandiri dari lahan yang sempit.</p>
+    </section>
+
+    <section class="sec light" id="berita" data-theme="light">
+        <span class="pill">BERITA & WAWASAN TERBARU</span>
+        <div class="row">
+            <h2 class="rv">Wawasan yang Menggerakkan Kebiasaan.</h2><a class="all" href="pages/edukasi.html">LIHAT
+                SEMUA</a>
+        </div>
+        <div class="grid3">
+            <a class="news rv" href="pages/edukasi.html" data-art="nft">
+                <div class="ni a1"><svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                        <defs>
+                            <g id="lf1">
+                                <path d="M0 0C-24-4-30-38-4-50 6-30 6-12 0 0Z" fill="#b9f45c" />
+                                <path d="M0 0C24-4 30-38 4-50" fill="none" stroke="#6fcf4a" stroke-width="4" />
+                            </g>
+                        </defs>
+                        <g opacity=".14" fill="none" stroke="#fff">
+                            <path d="M0 40h400M0 90h400M0 140h400" />
+                        </g>
+                        <circle cx="330" cy="60" r="26" fill="#b9f45c" opacity=".25" />
+                        <rect x="-10" y="168" width="420" height="34" rx="17" fill="#0b2d19" opacity=".6" />
+                        <path class="flow" d="M-10 185H410" stroke="#b9f45c" stroke-width="4" stroke-dasharray="12 12"
+                            fill="none" />
+                        <use href="#lf1" x="60" y="168" />
+                        <use href="#lf1" x="130" y="168" />
+                        <use href="#lf1" x="200" y="168" />
+                        <use href="#lf1" x="270" y="168" />
+                        <use href="#lf1" x="340" y="168" />
+                        <rect x="-10" y="224" width="420" height="14" rx="7" fill="#0b2d19" opacity=".45" />
+                    </svg></div><small>EDUKASI &nbsp; OKT 2026</small><b>Dasar
+                    Hidroponik NFT untuk Pemula</b>
+            </a>
+            <a class="news rv" href="pages/edukasi.html" data-art="ph">
+                <div class="ni a2"><svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="phg">
+                                <stop offset="0" stop-color="#e5483b" />
+                                <stop offset=".3" stop-color="#f2d230" />
+                                <stop offset=".5" stop-color="#4cb82e" />
+                                <stop offset=".75" stop-color="#1f9bb5" />
+                                <stop offset="1" stop-color="#6b3fb0" />
+                            </linearGradient>
+                        </defs>
+                        <g fill="none" stroke="#fff" opacity=".18">
+                            <circle cx="200" cy="105" r="70" />
+                            <circle cx="200" cy="105" r="100" />
+                            <circle cx="200" cy="105" r="130" />
+                        </g>
+                        <path d="M200 38C200 38 246 92 246 122a46 46 0 0 1-92 0C154 92 200 38 200 38Z" fill="#b9f45c" />
+                        <path d="M178 124a22 22 0 0 0 20 22" fill="none" stroke="#123a22" stroke-width="5"
+                            stroke-linecap="round" opacity=".5" />
+                        <rect x="50" y="196" width="300" height="14" rx="7" fill="url(#phg)" />
+                        <rect x="176" y="190" width="5" height="26" rx="2.5" fill="#fff" /><text x="50" y="236"
+                            fill="#fff" font-family="Space Mono,monospace" font-size="11" opacity=".8">pH 0</text><text
+                            x="350" y="236" text-anchor="end" fill="#fff" font-family="Space Mono,monospace"
+                            font-size="11" opacity=".8">14</text>
+                    </svg></div><small>EDUKASI &nbsp; OKT 2026</small><b>Cara
+                    Membaca pH dan EC Larutan</b>
+            </a>
+            <a class="news rv" href="pages/tentang.html" data-art="urban">
+                <div class="ni a3"><svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                        <defs>
+                            <pattern id="wn" width="14" height="16" patternUnits="userSpaceOnUse">
+                                <rect x="3" y="4" width="6" height="7" fill="#b9f45c" opacity=".55" />
+                            </pattern>
+                        </defs>
+                        <circle cx="330" cy="50" r="22" fill="#b9f45c" opacity=".5" />
+                        <g fill="#0b2d19" opacity=".75">
+                            <rect x="30" y="150" width="56" height="110" />
+                            <rect x="96" y="110" width="64" height="150" />
+                            <rect x="170" y="160" width="50" height="100" />
+                            <rect x="230" y="100" width="70" height="160" />
+                            <rect x="310" y="140" width="60" height="120" />
+                        </g>
+                        <g fill="url(#wn)">
+                            <rect x="30" y="150" width="56" height="110" />
+                            <rect x="96" y="110" width="64" height="150" />
+                            <rect x="170" y="160" width="50" height="100" />
+                            <rect x="230" y="100" width="70" height="160" />
+                            <rect x="310" y="140" width="60" height="120" />
+                        </g>
+                        <path d="M96 110 110 86H146L160 110Z" fill="none" stroke="#b9f45c" stroke-width="3" />
+                        <path d="M128 86c-10-4-12-18-2-24 8 8 8 16 2 24z" fill="#b9f45c" />
+                    </svg></div><small>PROYEK &nbsp; OKT 2026</small><b>Tentang
+                    Urban Farm</b>
+            </a>
+        </div>
+    </section>
+
+    <section class="sec cta" data-theme="dark">
+        <h2 class="big rv">Ubah Data Kebun Jadi Hasil Panen</h2>
+        <p class="rv">Buat kemajuan nyata dengan data yang bisa kamu verifikasi, audit, dan tindak lanjuti.</p>
+        <div class="btns"><button class="talk lime" id="btn-present" type="button">MULAI PRESENTASI MATERI
+                <i>&#9654;</i></button><a class="talk lime" href="#eksplor">MULAI EKSPLOR <i>&#8599;</i></a><a
+                class="talk lime"></a></div>
+    </section>
+
+    <script type="module" src="script.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="features.js"></script>
+    <script src="revisi.js"></script>
+    <script src="stack.js"></script>
+    <script src="ph-slider.js"></script>
+    <script type="module" src="orbital-gallery.js"></script>
+    <!-- uf-gallery-check: penjelasan di layar bila galeri 3D tidak muncul (boleh dihapus setelah jalan) -->
+    <script>
+        addEventListener("load", () => setTimeout(() => {
+            document.querySelectorAll("[data-orbital-gallery]").forEach((n) => {
+                if (n.classList.contains("og-err") || n.classList.contains("og-nogl")) return;
+                const say = (t) => { n.classList.add("og-err"); n.replaceChildren(); n.textContent = t; };
+                if (!n.querySelector("canvas")) say("Galeri 3D belum jalan: orbital-gallery.js tidak termuat (cek nama dan lokasi file, harus satu folder dengan index.html, lalu Ctrl+Shift+R).");
+                else if (n.clientHeight < 50) say("Galeri 3D belum punya tinggi: orbital-gallery.css tidak termuat (cek nama dan lokasi file).");
+            });
+        }, 2500));
+    </script>
+</body>
+
+</html>

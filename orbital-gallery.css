@@ -1,0 +1,334 @@
+/* =====================================================================
+   orbital-gallery.css - galeri 3D melayang (latar transparan) + modal materi
+   Memakai variabel yang sudah ada: --paper, --abu, --lime, --g1, --ink.
+   ===================================================================== */
+
+.og {
+    position: relative;
+    width: 100%;
+    height: clamp(420px, 78vh, 760px);
+    background: transparent;
+    /* video / latar milikmu tetap terlihat di belakang */
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.og canvas {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    cursor: grab;
+    /* geser vertikal tetap menggulir halaman; geser horizontal memutar galeri */
+    touch-action: pan-y;
+}
+
+.og.og-drag canvas {
+    cursor: grabbing;
+}
+
+.og.og-focus canvas {
+    cursor: default;
+}
+
+.og-nogl::after {
+    content: "Browser belum mendukung WebGL, jadi galeri 3D tidak bisa ditampilkan.";
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    text-align: center;
+    font: 400 .9rem "Inter Tight", system-ui, sans-serif;
+    opacity: .7;
+}
+
+.og-err {
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    text-align: center;
+    font: 400 .9rem "Inter Tight", system-ui, sans-serif;
+    color: #9b2c20;
+}
+
+/* tombol untuk keyboard / pembaca layar: tersembunyi tapi bisa difokus */
+.og-sr {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.og-sr button {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    border: 0;
+    padding: 0;
+}
+
+.og-sr button:focus-visible {
+    width: auto;
+    height: auto;
+    clip-path: none;
+    left: .8rem;
+    bottom: .8rem;
+    padding: .5rem .9rem;
+    border-radius: 999px;
+    background: var(--lime);
+    color: var(--ink);
+    font: 700 .68rem "Space Mono", monospace;
+}
+
+
+/* ---------- penempatan di halaman ----------
+   Section galeri dibuat lebih panjang dari layar (2,2x), dan kotak galeri
+   menempel (sticky) memenuhi layar selama section itu digulir. Jadi cincin
+   selalu terlihat penuh dan tidak tertutup section berikutnya; di rentang
+   scroll itu, scroll halaman memutar cincin. Setelah itu baru section
+   berikutnya meluncur menutupinya seperti biasa. */
+#galeri {
+    padding: 0;
+    min-height: calc(var(--vh) * 2.2);
+    /* stack.css memusatkan isi section secara vertikal; di sini harus rata atas, kalau tidak
+       kotak galeri turun dan menyisakan pita putih di atas video latar */
+    align-content: start;
+}
+
+#galeri>.og {
+    position: sticky;
+    top: 0;
+    max-width: none;
+    height: var(--vh);
+}
+
+/* ---------- modal ----------
+   Overlay hanya penangkap klik (tanpa blur/dim) agar foto yang membesar di
+   canvas tetap terlihat jelas di sebelahnya. */
+.og-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: clamp(1rem, 4vw, 3rem);
+}
+
+.og-modal[hidden] {
+    display: none;
+}
+
+.og-card {
+    position: relative;
+    width: min(420px, 100%);
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    padding: 1.6rem 1.5rem 1.5rem;
+    background: var(--paper, #eef1ee);
+    color: var(--ink, #0b0f0d);
+    border: 1px solid var(--abu, #e3ebe4);
+    border-radius: 26px;
+    box-shadow: 0 30px 80px -20px rgba(5, 8, 6, .55);
+    outline: 0;
+    opacity: 0;
+    transform: translateY(18px) scale(.98);
+    transition: opacity .25s, transform .3s cubic-bezier(.2, .8, .2, 1);
+}
+
+.og-modal.open .og-card {
+    opacity: 1;
+    transform: none;
+}
+
+.og-x {
+    position: absolute;
+    top: .9rem;
+    right: .9rem;
+    border: 0;
+    cursor: pointer;
+    background: var(--g1, #123a22);
+    color: #fff;
+    font: 700 .65rem "Space Mono", monospace;
+    padding: .5rem .8rem;
+    border-radius: 999px;
+}
+
+.og-x:hover,
+.og-x:focus-visible {
+    background: var(--lime, #b9f45c);
+    color: var(--ink, #0b0f0d);
+}
+
+.og-tag {
+    display: inline-block;
+    background: var(--lime, #b9f45c);
+    color: var(--ink, #0b0f0d);
+    font: 700 .62rem "Space Mono", monospace;
+    padding: .25rem .55rem;
+    border-radius: 999px;
+}
+
+.og-h {
+    margin: .9rem 2.5rem .4rem 0;
+    font: 500 clamp(1.6rem, 3vw, 2.1rem)/1.05 "Inter Tight", system-ui, sans-serif;
+    letter-spacing: -.03em;
+    color: #123a22;
+}
+
+.og-p {
+    margin: 0 0 1.1rem;
+    font-size: .95rem;
+    line-height: 1.5;
+    opacity: .8;
+}
+
+.og-dl {
+    margin: 0;
+    display: grid;
+    gap: .5rem;
+}
+
+.og-dl div {
+    display: grid;
+    gap: .15rem;
+    padding: .7rem .85rem;
+    background: #fff;
+    border: 1px solid var(--abu, #e3ebe4);
+    border-radius: 14px;
+}
+
+.og-dl dt {
+    font: 700 .6rem "Space Mono", monospace;
+    color: #5c6b62;
+}
+
+.og-dl dd {
+    margin: 0;
+    font-size: .92rem;
+    font-weight: 600;
+    color: #123a22;
+}
+
+.og-tips {
+    margin: 1rem 0 0;
+    padding-left: 1.1rem;
+    font-size: .85rem;
+    line-height: 1.5;
+    opacity: .85;
+}
+
+.og-tips li {
+    margin: .25rem 0;
+}
+
+@media (max-width: 800px) {
+
+    /* di HP: kartu menjadi bottom sheet, foto fokus tampil di atasnya */
+    .og-modal {
+        align-items: flex-end;
+        justify-content: center;
+        padding: .6rem;
+    }
+
+    .og-card {
+        width: 100%;
+        max-height: 52vh;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .og-card {
+        transition: opacity .15s;
+        transform: none;
+    }
+}
+
+/* ---------- gambar latar khusus galeri ----------
+   Ganti gambarnya cukup dengan mengubah src di <img class="og-bg"> pada index.html
+   (atau timpa file gambarnya dengan nama yang sama). Atur gelap-terang lewat --og-veil. */
+#galeri {
+    overflow: clip;
+    /* sudut membulat section tetap memotong video; clip tidak mematikan sticky */
+}
+
+.og {
+    --og-veil: 0;
+    /* 0 = gambar apa adanya, 0.3 = digelapkan 30% */
+}
+
+.og-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.og::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(5, 8, 6, var(--og-veil));
+    pointer-events: none;
+}
+
+/* ---------- tombol putar kiri / kanan ---------- */
+.og-nav {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    width: 52px;
+    height: 52px;
+    margin-top: -26px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, .35);
+    border-radius: 50%;
+    background: rgba(8, 28, 16, .55);
+    color: #fff;
+    font: 400 2rem/1 "Inter Tight", system-ui, sans-serif;
+    padding: 0 0 .25rem;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    transition: background .2s, color .2s, opacity .25s;
+}
+
+.og-prev {
+    left: clamp(.6rem, 3vw, 2rem);
+}
+
+.og-next {
+    right: clamp(.6rem, 3vw, 2rem);
+}
+
+.og-nav:hover,
+.og-nav:focus-visible {
+    background: var(--lime, #b9f45c);
+    color: var(--ink, #0b0f0d);
+}
+
+.og.og-focus .og-nav {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.og:focus-visible {
+    outline: 2px solid var(--lime, #b9f45c);
+    outline-offset: -4px;
+}
+
+@media (prefers-reduced-motion: reduce) {}

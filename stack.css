@@ -1,0 +1,328 @@
+/* =====================================================================
+   STACK.CSS - Overlapping Section / Card Stacking Scroll
+   Dimuat PALING AKHIR (setelah style.css, features.css, revisi.css).
+   Perilaku (sticky, skala, redup, sembunyikan section tertutup) ada di stack.js.
+   Semua aturan penumpukan diberi awalan html.js-stack: tanpa JS atau saat
+   prefers-reduced-motion, halaman kembali menjadi susunan biasa.
+   ===================================================================== */
+
+:root {
+    --vh: 100svh;
+    /* stack.js mengisinya dalam px */
+    --bg-deep: #050806;
+    /* latar di belakang kartu yang mengecil */
+    --ink-2: #0c1210;
+    /* section gelap: sedikit lebih terang dari latar agar tepinya terbaca */
+    --paper-2: #f5f7f4;
+    --r-sec: clamp(22px, 3.2vw, 38px);
+
+    /* skala tipografi */
+    --fs-h2: clamp(2rem, 4.4vw, 3.6rem);
+    --fs-h2-big: clamp(2.4rem, 6.2vw, 5rem);
+    --fs-lead: clamp(1.02rem, 1.4vw, 1.2rem);
+    --fs-label: .66rem;
+}
+
+/* ---------------------------------------------------------------------
+   1. DASAR HALAMAN
+   --------------------------------------------------------------------- */
+body.lp {
+    background: var(--bg-deep);
+    /* "clip" (bukan "hidden") agar body tidak menjadi scroll container,
+       sebab itu akan mematikan position: sticky, terutama saat modal artikel
+       mengunci scroll lewat html.am-lock. */
+    overflow-x: clip;
+}
+
+/* Video latar bersama sudah dihapus dari index.html: section kini opak, jadi
+   video 95%-tertutup itu hanya membuang decode & compositing. */
+.bg-fixed {
+    display: none !important;
+}
+
+/* ---------------------------------------------------------------------
+   2. PERMUKAAN SECTION: opak, sudut atas tumpul, bayangan ke atas
+   --------------------------------------------------------------------- */
+.sec {
+    border-radius: var(--r-sec) var(--r-sec) 0 0;
+    box-shadow: 0 -26px 60px -18px rgba(5, 8, 6, .5), 0 -2px 10px rgba(5, 8, 6, .08);
+}
+
+.sec.light {
+    background: var(--paper);
+}
+
+.sec.light:nth-of-type(even) {
+    background: var(--paper-2);
+}
+
+.sec.dark {
+    background: var(--ink-2);
+    box-shadow: 0 -26px 60px -18px rgba(5, 8, 6, .55), inset 0 1px 0 rgba(255, 255, 255, .09);
+}
+
+/* Ritme vertikal. .cta dikecualikan karena padding-bawahnya memang 0. */
+.sec:not(.cta) {
+    padding-block: clamp(4.5rem, 10vh, 7rem);
+    padding-inline: clamp(1.1rem, 4vw, 2.6rem);
+}
+
+.sec.cta {
+    padding-top: clamp(4.5rem, 10vh, 7rem);
+    padding-inline: clamp(1.1rem, 4vw, 2.6rem);
+}
+
+/* Kartu di atas latar opak tidak lagi butuh blur (backdrop-filter itu mahal di GPU) */
+.sec.light .dash,
+.sec.light .mon .k:not(.phm),
+.sec.light .panel {
+    background: #fff;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+.sec.light .def:not(.hl),
+.sec.light .acc {
+    background: rgba(255, 255, 255, .72);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+/* Kartu kaca di hero: ganti blur dengan lapisan hijau tua semi-transparan (tampilan hampir sama) */
+#hero .hot-row .hot {
+    background: rgba(8, 28, 16, .5);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+/* ---------------------------------------------------------------------
+   3. HIERARKI TIPOGRAFI
+   --------------------------------------------------------------------- */
+.sec h2 {
+    font-size: var(--fs-h2);
+    line-height: 1.04;
+    letter-spacing: -.035em;
+    text-wrap: balance;
+    margin-bottom: clamp(1.6rem, 3.4vw, 2.8rem);
+}
+
+.sec h2.big {
+    font-size: var(--fs-h2-big);
+    line-height: .98;
+    letter-spacing: -.04em;
+}
+
+.pill {
+    font-size: var(--fs-label);
+    letter-spacing: .12em;
+    padding: .38rem .8rem;
+    border-radius: 999px;
+    margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.tech p,
+.integ .lead,
+.trust p,
+.cta p {
+    font-size: var(--fs-lead);
+    line-height: 1.55;
+}
+
+.trust h3 {
+    font-size: clamp(1.5rem, 2.8vw, 2.2rem);
+    letter-spacing: -.03em;
+    line-height: 1.1;
+    text-wrap: balance;
+}
+
+.def p {
+    font-size: clamp(1.1rem, 1.7vw, 1.3rem);
+    line-height: 1.32;
+}
+
+.card-img b {
+    font-size: clamp(1.3rem, 2vw, 1.6rem);
+    letter-spacing: -.02em;
+}
+
+.acc summary {
+    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    letter-spacing: -.015em;
+}
+
+.news b {
+    font-size: clamp(1.1rem, 1.6vw, 1.25rem);
+    line-height: 1.2;
+    text-wrap: balance;
+}
+
+/* ---------------------------------------------------------------------
+   4. PENUMPUKAN (hanya aktif bila stack.js berjalan)
+   --------------------------------------------------------------------- */
+
+/* Hero lebih panjang: sebagian (100vh terakhir) dipakai section pertama untuk
+   meluncur menutupinya, jadi scene 2 tetap punya waktu tampil. */
+html.js-stack #hero {
+    height: calc(var(--vh) * 4.6);
+    background: var(--bg-deep);
+}
+
+html.js-stack #hero .stick {
+    height: var(--vh);
+    border-radius: calc(var(--r-sec) * var(--p, 0));
+}
+
+html.js-stack #hero+.sec {
+    margin-top: calc(var(--vh) * -1);
+}
+
+/* Setiap section menempel (sticky). Nilai top dihitung stack.js:
+   0 untuk section pendek, negatif (= tinggi layar - tinggi section) untuk section
+   tinggi, sehingga section tinggi ikut digulir dulu sampai dasarnya sejajar dasar
+   layar, baru menempel dan ditutupi section berikutnya. */
+html.js-stack .sec {
+    position: sticky;
+    top: 0;
+    min-height: var(--vh);
+    align-content: center;
+}
+
+/* Section terakhir tidak perlu menempel */
+html.js-stack .sec:last-of-type {
+    position: relative;
+}
+
+/* Lapisan peredup di atas section yang sedang tertutup */
+html.js-stack .sec::after,
+html.js-stack #hero .stick::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 60;
+    border-radius: inherit;
+    background: var(--bg-deep);
+    opacity: var(--dim, 0);
+    pointer-events: none;
+}
+
+/* Hanya section yang sedang bergerak (atau akan segera bergerak) dipromosikan
+   menjadi layer GPU sendiri. will-change di semua section sekaligus akan
+   menghabiskan memori GPU, terutama bersama canvas Three.js. */
+html.js-stack .is-receding {
+    will-change: transform;
+}
+
+/* Section yang sudah tertutup penuh tidak perlu digambar sama sekali */
+html.js-stack .is-buried {
+    visibility: hidden;
+}
+
+/* ---------------------------------------------------------------------
+   5. MOBILE
+   --------------------------------------------------------------------- */
+@media (max-width: 800px) {
+    :root {
+        --r-sec: 22px;
+        --fs-h2: clamp(1.8rem, 8vw, 2.4rem);
+        --fs-h2-big: clamp(2.1rem, 10vw, 3.2rem);
+    }
+
+    .sec:not(.cta) {
+        padding-block: clamp(3.5rem, 8vh, 5rem);
+    }
+}
+
+/* ---------------------------------------------------------------------
+   6. HEMAT DAYA
+   --------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+    .sec,
+    .sec::after {
+        transition: none !important;
+    }
+}
+
+/* ---------------------------------------------------------------------
+   7. ILUSTRASI "Apa itu Smart & Urban Farming?" (SVG buatan kode, tanpa foto)
+   --------------------------------------------------------------------- */
+.intro-art {
+    position: relative;
+    overflow: hidden;
+    background: #0d2c1a;
+}
+
+.intro-art svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+}
+
+@keyframes ia-pulse {
+
+    0%,
+    100% {
+        opacity: .2;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes ia-flow {
+    to {
+        stroke-dashoffset: -24;
+    }
+}
+
+@keyframes ia-float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+.ia-arc {
+    animation: ia-pulse 2.4s ease-in-out infinite;
+}
+
+.ia-arc.b {
+    animation-delay: .3s;
+}
+
+.ia-arc.c {
+    animation-delay: .6s;
+}
+
+.ia-flow {
+    stroke-dasharray: 6 6;
+    animation: ia-flow 1.4s linear infinite;
+}
+
+.ia-float {
+    animation: ia-float 5s ease-in-out infinite;
+}
+
+.ia-float.b {
+    animation-delay: -1.7s;
+}
+
+.ia-float.c {
+    animation-delay: -3.2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .ia-arc,
+    .ia-flow,
+    .ia-float {
+        animation: none;
+    }
+}
